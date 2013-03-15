@@ -86,10 +86,10 @@ function setExclusions(fpath) {
   var combinedExclusions = referencedExclusions + "\n" + 
                            nakExclusions + "\n" + 
                            gitExclusions + "\n" + 
-                           (options.ignore || "");
+                           (options.ignore || ""); // (options.ignore ? "^.*" || "");
 
   if (combinedExclusions.length) {
-    options.exclusions = combinedExclusions.split(/\r?\n/).filter(function (e) { return !!e && /^[^#]/.test(e)});
+    options.exclusions = combinedExclusions.split(/\r?\n/).filter(function (r) { return r.trim() && !/^#/.test(r)});
     options.exclusionsLength = options.exclusions.length;
   }
 };
